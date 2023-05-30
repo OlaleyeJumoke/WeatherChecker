@@ -22,9 +22,15 @@ class WeatherViewModel extends BaseChangeNotifier {
       var res = await weatherRepository.getWeatherInfo(long, lat);
       loading = false;
       if (res.success) {
-        _weatherInfoModel = WeatherInfoModel.fromJson(res.data);
+        printOnlyInDebug(res.data);
+        try {
+          _weatherInfoModel = WeatherInfoModel.fromJson(res.data);
+        } catch (e) {
+          printOnlyInDebug(e);
+        }
+        printOnlyInDebug(_weatherInfoModel?.weather.first);
       }
-      
+
       notifyListeners();
     } catch (e) {
       loading = false;

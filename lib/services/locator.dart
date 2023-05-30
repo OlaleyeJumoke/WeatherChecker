@@ -15,7 +15,7 @@ Future<void> setupLocator({
       .registerLazySingleton<NavigationHandler>(() => NavigationHandlerImpl());
   
   locator.registerLazySingleton<WeatherRepository>(
-      () => WeatherRepositoryImplementation(baseApi));
+      () => WeatherRepositoryImplementation(baseApi, apiKey));
   locator.registerLazySingleton<HiveRepository>(
       () => HiveRepositoryImplementation());
 }

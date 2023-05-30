@@ -13,7 +13,7 @@ import 'connection_service.dart';
 abstract class ApiService {
   //final _storageService = locator<SecureStorageService>();
   late Dio dio;
-  late String getBaseUrl;
+  //late String getBaseUrl;
 //Production
   ApiService(String baseApi) {
     final options = BaseOptions(
@@ -22,7 +22,7 @@ abstract class ApiService {
       connectTimeout: const Duration(seconds: 60), // 60 seconds
       receiveTimeout: const Duration(seconds: 60), // 60 seconds
     );
-
+   // getBaseUrl = baseApi;
     dio = Dio(options);
 
     dio.interceptors.add(
@@ -88,7 +88,6 @@ abstract class ApiService {
     printOnlyInDebug('token:$token');
     return {
       'Content-type': 'application/json',
-      
       'b-access-token': useToken ? token : null
     };
   }

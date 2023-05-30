@@ -16,7 +16,7 @@ void main() async {
   
   final url = dotenv.env['BASE_URL']!;
   final apiKey = dotenv.env['API_KEY']!;
-  await setupLocator();
+  await setupLocator(baseApi: url, apiKey: apiKey);
   await _openHive();
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],

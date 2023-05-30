@@ -3,18 +3,19 @@ import 'package:weather_check/services/dio_service.dart';
 import 'package:weather_check/services/general_response.dart';
 
 abstract class WeatherRepository {
-  Future<GeneralResponse> getWeatherInfo(Map<String, dynamic> cityInfo);
- // Future<GeneralResponse> printEOD(String type);
+  Future<GeneralResponse> getWeatherInfo(String long, String lat);
 }
 
 class WeatherRepositoryImplementation extends ApiService
     implements WeatherRepository {
-      WeatherRepositoryImplementation(String baseApi) : super(baseApi);
+  String apiKey;
+  WeatherRepositoryImplementation(String baseApi, this.apiKey)
+      : super(baseApi);
+
   @override
-  Future<GeneralResponse> getWeatherInfo(
-      Map<String, dynamic> cityInfo) async {
-    var response = await get(ApiEndpoints.currentData,
-        data: cityInfo, useToken: true);
+  Future<GeneralResponse> getWeatherInfo(String long, String lat) async {
+    var response = await get(ApiEndpoints.currentData(long, lat, apiKey),
+        useToken: true);
     return GeneralResponse.fromJson(response);
   }
 }
